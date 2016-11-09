@@ -219,18 +219,15 @@ sub abbr {
             push @abbr, substr($word,0,1);
         }
         my $raw_abbr = 
-            $opt{periods} && 
-            $opt{periods} =~ /^[yt1]/i ? 
+            $opt{periods} && $opt{periods} =~ /^[yt1]/i ? 
                 join( '', map { $_ =~ s/$/./; $_; } @abbr) : 
                 join( '', @abbr);
 
-        my $out = $opt{REMOVElc} && 
-            !$opt{ALLCAPS} ? 
+        my $out = $opt{REMOVElc} && !$opt{ALLCAPS} ? 
                 $raw_abbr =~ s/[a-z]/''/ge : 
                 $raw_abbr; #agregado mio
 
-        my $final_abbr = $opt{ALLCAPS} && 
-            $opt{ALLCAPS} =~ /^[yt1]/i ? 
+        my $final_abbr = $opt{ALLCAPS} && $opt{ALLCAPS} =~ /^[yt1]/i ? 
                 uc $raw_abbr : 
                 $raw_abbr;
 
