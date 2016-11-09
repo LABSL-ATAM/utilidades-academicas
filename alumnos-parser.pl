@@ -214,23 +214,35 @@ sub abbr {
 		return $opt{name};
 	
 	}else {
-    my @abbr;
-    for my $word (split(/[ _-]/,$name)) {
-      push @abbr, substr($word,0,1);
-    }
-    my $raw_abbr = $opt{periods} && $opt{periods} =~ /^[yt1]/i ? 
-    	join('',map { $_ =~ s/$/./; $_; } @abbr) : join('',@abbr);
-    my $out = $opt{REMOVElc} && !$opt{ALLCAPS} ? 
-    	$raw_abbr =~ s/[a-z]/''/ge : $raw_abbr; #agregado mio
-    my $final_abbr = $opt{ALLCAPS} && $opt{ALLCAPS} =~ /^[yt1]/i ? 
-    	uc $raw_abbr : $raw_abbr;
+        my @abbr;
+        for my $word (split(/[ _-]/,$name)) {
+            push @abbr, substr($word,0,1);
+        }
+        my $raw_abbr = 
+            $opt{periods} && 
+            $opt{periods} =~ /^[yt1]/i ? 
+                join( '', map { $_ =~ s/$/./; $_; } @abbr) : 
+                join( '', @abbr);
 
-    if ($opt{HTML} && $opt{HTML} =~ /^[yt1]/i) {
-      return qq(<abbr title="$opt{name}">$final_abbr</abbr>);
-    }
-    else {
-      return $final_abbr;
-    }
+        my $out = $opt{REMOVElc} && 
+            !$opt{ALLCAPS} ? 
+                $raw_abbr =~ s/[a-z]/''/ge : 
+                $raw_abbr; #agregado mio
+
+        my $final_abbr = $opt{ALLCAPS} && 
+            $opt{ALLCAPS} =~ /^[yt1]/i ? 
+                uc $raw_abbr : 
+                $raw_abbr;
+
+        if (
+            $opt{HTML} && $opt{HTML} =~ 
+            /^[yt1]/i
+        ){
+          return qq(<abbr title="$opt{name}">$final_abbr</abbr>);
+        }
+        else {
+          return $final_abbr;
+        }
   }
 }
 
