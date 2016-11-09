@@ -1,5 +1,8 @@
 #!/usr/bin/perl
 
+# Procesar informes cuatrimestrales de inscripciones crudos 
+# y obtener listas consistentes, organizadas por alumno .
+
 # use strict;
 use warnings;
 use Switch;
